@@ -54,8 +54,8 @@ class Engine:
         self.__color_information = None
 
     def setImage(self, image):
-        image_file = tempfile.mkstemp(dir = self.temporary_folder,
-                                      suffix = '.' + self.image_format.lower())[1]
+        image_file = tempfile.mktemp(dir = self.temporary_folder,
+                                      suffix = '.' + self.image_format.lower())
         image = image.convert('L')
         try:
             image.save(image_file, format = self.image_format)
@@ -67,7 +67,7 @@ class Engine:
         parsed_arguments = self.arguments.replace(IMAGE_ARGUMENT, self.image_path)
         file_name = None
         if self.arguments.find(FILE_ARGUMENT) != -1:
-            file_name = tempfile.mkstemp(dir = self.temporary_folder)[1]
+            file_name = tempfile.mktemp(dir = self.temporary_folder)
             parsed_arguments = parsed_arguments.replace(FILE_ARGUMENT, file_name)
         text = os.popen(self.engine_path + ' ' + parsed_arguments).read()
         try:

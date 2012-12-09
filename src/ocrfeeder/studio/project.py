@@ -87,9 +87,9 @@ class ProjectSaver:
         self.__createProjectFile(new_node.toxml(), file_name)
 
     def __createProjectFile(self, xml_content, file_name):
-        temp_dir = tempfile.mkstemp(dir = self.temp_dir)[1]
+        temp_dir = tempfile.mktemp(dir = self.temp_dir)
         try:
-            os.remove(temp_dir)
+            os.rmdir(temp_dir)
         except:
             pass
         os.mkdir(temp_dir)
